@@ -1,15 +1,41 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
+import { useRef } from "react";
+import axiosClient from "../axios-client";
+import { useStateContext } from "../contexts/contextProvider";
 const Title = styled.h1`
     font-family: "Zen Dots", cursive;
 `;
 
-const onSubmit = (e) => {
-    e.preventDefault();
-    console.log("register");
-};
-export default function signup() {
+export default function Signup() {
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const passwordConfirmRef = useRef();
+    const { setToken, setUser } = useStateContext();
+    const onSubmit = (e) => {
+        e.preventDefault();
+        console.log("register");
+        const payload = {
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+            password_confirm: passwordConfirmRef.current.value,
+        };
+
+        console.log(payload);
+        axiosClient
+            .post("/signup", payload)
+            .then(({ data }) => {
+                setToken(data.token);
+                setUser(data.user);
+            })
+            .catch((err) => {
+                const response = err.response;
+                if (response && response.status === 422) {
+                    console.log(response.data.errors);
+                }
+            });
+    };
+
     return (
         <div className="row">
             <div className="col-lg"></div>
@@ -23,6 +49,7 @@ export default function signup() {
                             <div className="card-body  bg-light-subtle">
                                 <div className="form-floating mb-3">
                                     <input
+                                        ref={emailRef}
                                         type="email"
                                         className="form-control"
                                         id="floatingInput"
@@ -34,6 +61,7 @@ export default function signup() {
                                 </div>
                                 <div className="form-floating mb-3">
                                     <input
+                                        ref={passwordRef}
                                         type="password"
                                         className="form-control"
                                         id="floatingPassword"
@@ -45,6 +73,7 @@ export default function signup() {
                                 </div>
                                 <div className="form-floating mb-3">
                                     <input
+                                        ref={passwordConfirmRef}
                                         type="password"
                                         className="form-control"
                                         id="floatingPasswordConfirmation"
@@ -54,12 +83,12 @@ export default function signup() {
                                         Password confirmation
                                     </label>
                                 </div>
-                                <a
-                                    href="#"
+                                <button
+                                    type="submit"
                                     className="btn btn-primary mx-2 px-2 mb-2"
                                 >
                                     Register
-                                </a>
+                                </button>
                                 <span>Already have an account?</span>
                                 <Link
                                     to="/login"
