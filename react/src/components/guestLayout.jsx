@@ -6,7 +6,7 @@ export default function guestLayout() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { token } = useStateContext();
     if (token) {
-        return <Navigate to="/" />;
+        return <Navigate to="/home" />;
     }
     return (
         <div>

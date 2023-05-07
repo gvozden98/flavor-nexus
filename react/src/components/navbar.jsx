@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -5,7 +6,7 @@ const Brand = styled.span`
     font-family: "Zen Dots", cursive;
 `;
 
-function Navbar() {
+function Navbar(props) {
     return (
         <nav className="navbar navbar-expand-xl navbar-light bg-info">
             <div className="container-fluid">
@@ -51,6 +52,10 @@ function Navbar() {
                             </a>
                         </li>
                     </ul>
+                    <span className="navbar-text fs-5 text">
+                        {props.user ? props.user.email : ""}
+                    </span>
+                    <button className="btn btn-danger mx-2">Logout</button>
                 </div>
             </div>
         </nav>

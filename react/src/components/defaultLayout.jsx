@@ -9,10 +9,10 @@ export default function defaultLayout() {
     if (!token) {
         return <Navigate to="/login" />;
     }
-
+    console.log(user);
     return (
         <div>
-            <Navbar />
+            <Navbar user={user} />
             <Outlet />
         </div>
     );

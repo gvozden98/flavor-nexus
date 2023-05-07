@@ -10,6 +10,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@mui/icons-material": "^5.11.16",
         "react-router-dom": "^6.11.1",
         "styled-components": "^6.0.0-rc.1",
         "yarn": "^1.22.19"
