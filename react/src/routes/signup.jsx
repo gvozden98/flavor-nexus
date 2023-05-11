@@ -1,6 +1,6 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useRef } from "react";
 import axiosClient from "../axios-client";
 import { useStateContext } from "../contexts/contextProvider";
 const Title = styled.h1`
@@ -23,7 +23,7 @@ export default function Signup() {
 
         console.log(payload);
         axiosClient
-            .post("api/signup", payload)
+            .post("/signup", payload)
             .then(({ data }) => {
                 setToken(data.token);
                 setUser(data.user);
