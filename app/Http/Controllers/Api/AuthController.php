@@ -22,15 +22,13 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password'=> bcrypt($data['password'])
         ]);
-        $token = $user->createToken('auth_token')->plainTextToken;
-        $headers =([
-            "Access-Control-Allow-Origin"=>"*",
-            "Access-Control-Allow-Credentials" =>"true",
-            "Access-Control-Allow-Methods" => "GET,HEAD,OPTIONS,POST,PUT",
-            "Access-Control-Allow-Headers" => "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
-        ]);
+        $token = $user->createToken('main')->plainTextToken;
         
-        return response(compact('user', 'token'), 200, $headers);
+        //return response(['message'=>$data]);
+        return response([
+            'user'=>$user,
+            'token'=>$token
+        ]);
     }
     public function login(LoginRequest $request)
     {

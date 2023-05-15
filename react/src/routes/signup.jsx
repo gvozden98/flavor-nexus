@@ -3,22 +3,25 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axiosClient from "../axios-client";
 import { useStateContext } from "../contexts/contextProvider";
+import { useState } from "react";
 const Title = styled.h1`
     font-family: "Zen Dots", cursive;
 `;
 
 export default function Signup() {
+    const nameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
-    const passwordConfirmRef = useRef();
+    const passwordConfirmationRef = useRef();
+    const [errors, setErrors] = useState(null);
     const { setToken, setUser } = useStateContext();
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log("register");
         const payload = {
+            name: nameRef.current.value,
             email: emailRef.current.value,
             password: passwordRef.current.value,
-            password_confirm: passwordConfirmRef.current.value,
+            password_confirmation: passwordConfirmationRef.current.value,
         };
 
         console.log(payload);
@@ -27,11 +30,13 @@ export default function Signup() {
             .then(({ data }) => {
                 setToken(data.token);
                 setUser(data.user);
+                //console.log(data);
             })
             .catch((err) => {
+                //console.log(err);
                 const response = err.response;
                 if (response && response.status === 422) {
-                    console.log(response.data.errors);
+                    setErrors(response.data.errors); //set errors for the alert
                 }
             });
     };
@@ -46,7 +51,30 @@ export default function Signup() {
                             <Title>Register</Title>
                         </div>
                         <form onSubmit={onSubmit}>
+                            {/* display error for wrong login */}
+                            {errors && (
+                                <div className="container mt-3">
+                                    <div
+                                        className="alert alert-danger"
+                                        role="alert"
+                                    >
+                                        {Object.keys(errors).map(key => (
+                                                <p key={key}>{errors[key][0]}</p>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                             <div className="card-body  bg-light-subtle">
+                                <div className="form-floating mb-3">
+                                    <input
+                                        ref={nameRef}
+                                        type="text"
+                                        className="form-control"
+                                        id="name"
+                                        placeholder="Name"
+                                    ></input>
+                                    <label htmlFor="floatingInput">Name</label>
+                                </div>
                                 <div className="form-floating mb-3">
                                     <input
                                         ref={emailRef}
@@ -64,22 +92,22 @@ export default function Signup() {
                                         ref={passwordRef}
                                         type="password"
                                         className="form-control"
-                                        id="floatingPassword"
+                                        id="password"
                                         placeholder="Password"
+                                        name="password"
                                     ></input>
-                                    <label htmlFor="floatingPassword">
-                                        Password
-                                    </label>
+                                    <label htmlFor="password">Password</label>
                                 </div>
                                 <div className="form-floating mb-3">
                                     <input
-                                        ref={passwordConfirmRef}
+                                        ref={passwordConfirmationRef}
                                         type="password"
                                         className="form-control"
-                                        id="floatingPasswordConfirmation"
+                                        id="password_confirmation"
                                         placeholder="Password"
+                                        name="password_confirmation"
                                     ></input>
-                                    <label htmlFor="floatingPasswordConfirmation">
+                                    <label htmlFor="password_confirmation">
                                         Password confirmation
                                     </label>
                                 </div>
