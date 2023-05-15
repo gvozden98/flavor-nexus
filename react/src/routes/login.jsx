@@ -44,16 +44,16 @@ export default function login() {
                                         Password
                                     </label>
                                 </div>
-                                <a
+                                <button
                                     href="#"
-                                    className="btn btn-primary mx-2 px-2 mb-2"
+                                    className="btn accent-button color-accent mx-2 px-2 mb-2"
                                 >
                                     Login
-                                </a>
+                                </button>
                                 <span>Not registered?</span>
                                 <Link
                                     to="/signup"
-                                    className="btn btn-secondary mx-2 px-2 mb-2"
+                                    className="btn color-secondary secondary-button mx-2 px-2 mb-2"
                                 >
                                     Register
                                 </Link>

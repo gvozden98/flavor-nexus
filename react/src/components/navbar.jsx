@@ -8,7 +8,7 @@ const Brand = styled.span`
 
 function Navbar(props) {
     return (
-        <nav className="navbar navbar-expand-xl navbar-light bg-info">
+        <nav className="navbar navbar-expand-xl color-primary">
             <div className="container-fluid">
                 <Link to="/" style={{ textDecoration: "none" }}>
                     <Brand className="navbar-brand">Flavor NEXUS</Brand>
@@ -29,7 +29,7 @@ function Navbar(props) {
                     <ul className="navbar-nav me-auto mb-2 mb-xl-0">
                         <li className="nav-item">
                             <Link
-                                className="nav-link active"
+                                className="nav-link active fs-5 text"
                                 aria-current="page"
                                 to="/home"
                             >
@@ -37,13 +37,13 @@ function Navbar(props) {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/profile">
+                            <Link className="nav-link fs-5 text" to="/profile">
                                 Profile
                             </Link>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item fs-5 text">
                             <a
-                                className="nav-link disabled"
+                                className="nav-link disabled fs-5 text"
                                 href="#"
                                 tabIndex="-1"
                                 aria-disabled="true"
@@ -52,10 +52,12 @@ function Navbar(props) {
                             </a>
                         </li>
                     </ul>
-                    <span className="navbar-text fs-5 text">
+                    <span className="navbar-text fs-5 text ">
                         {props.user ? props.user.email : ""}
                     </span>
-                    <button className="btn btn-danger mx-2">Logout</button>
+                    <button className="btn mx-2 color-accent accent-button fs-5 text">
+                        Logout
+                    </button>
                 </div>
             </div>
         </nav>

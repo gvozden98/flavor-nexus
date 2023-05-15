@@ -1,0 +1,19 @@
+/* colors */
+.color-primary {
+  background-color: #36cc64;
+}
+
+.color-secondary {
+    background-color: #eaeaa9;
+}
+
+.color-accent{
+    background-color: #c87041;
+}
+
+.accent-button:hover{
+    background-color: #eaeaa9;
+}
+.secondary-button:hover{
+    background-color: #c87041;
+}

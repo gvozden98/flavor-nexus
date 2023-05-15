@@ -58,8 +58,8 @@ export default function Signup() {
                                         className="alert alert-danger"
                                         role="alert"
                                     >
-                                        {Object.keys(errors).map(key => (
-                                                <p key={key}>{errors[key][0]}</p>
+                                        {Object.keys(errors).map((key) => (
+                                            <p key={key}>{errors[key][0]}</p>
                                         ))}
                                     </div>
                                 </div>
@@ -113,14 +113,14 @@ export default function Signup() {
                                 </div>
                                 <button
                                     type="submit"
-                                    className="btn btn-primary mx-2 px-2 mb-2"
+                                    className="btn color-accent accent-button mx-2 px-2 mb-2"
                                 >
                                     Register
                                 </button>
                                 <span>Already have an account?</span>
                                 <Link
                                     to="/login"
-                                    className="btn btn-secondary mx-2 px-2 mb-2"
+                                    className="btn color-secondary secondary-button mx-2 px-2 mb-2"
                                 >
                                     Login
                                 </Link>
