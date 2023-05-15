@@ -25,6 +25,7 @@ export default function Signup() {
         };
 
         console.log(payload);
+        setErrors(null);
         axiosClient
             .post("/signup", payload)
             .then(({ data }) => {

@@ -18,19 +18,12 @@ use App\Http\Middleware\OwnCors;
 */
 
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-// Route::group(['prefix' => 'api/v1', 'middleware' => []], function () {
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
 
-//     header("Access-Control-Allow-Origin: *");
-//     header("Access-Control-Allow-Headers: *");
-
-//     /* Products */
-    
-
-// });
-//Route::post('/testiranje', [AuthController::class, 'testiranje']);
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);

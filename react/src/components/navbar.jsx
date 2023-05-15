@@ -10,7 +10,7 @@ function Navbar(props) {
     return (
         <nav className="navbar navbar-expand-xl color-primary">
             <div className="container-fluid">
-                <Link to="/" style={{ textDecoration: "none" }}>
+                <Link to="/home" style={{ textDecoration: "none" }}>
                     <Brand className="navbar-brand">Flavor NEXUS</Brand>
                 </Link>
 
@@ -55,7 +55,10 @@ function Navbar(props) {
                     <span className="navbar-text fs-5 text ">
                         {props.user ? props.user.email : ""}
                     </span>
-                    <button className="btn mx-2 color-accent accent-button fs-5 text">
+                    <button
+                        className="btn mx-2 color-accent accent-button fs-5 text"
+                        onClick={props.onLogout}
+                    >
                         Logout
                     </button>
                 </div>

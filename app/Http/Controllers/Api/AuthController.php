@@ -17,37 +17,39 @@ class AuthController extends Controller
     {
         $data = $request->validated();
         /** @var \App\Models\User */
-        $user= User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password'=> bcrypt($data['password'])
+            'password' => bcrypt($data['password'])
         ]);
         $token = $user->createToken('main')->plainTextToken;
         return response([
-            'user'=>$user,
-            'token'=>$token
+            'user' => $user,
+            'token' => $token
         ]);
     }
     public function login(LoginRequest $request)
     {
         $credentials = $request->validated();
-        if(!Auth::attempt($credentials)){
-            return response(['message'=>'Invalid credentials']);
+        if (!Auth::attempt($credentials)) {
+            return response(['message' => 'Email or password is incorrect'], 422);
         }
         /** @var \App\Models\User */
         $user = Auth::user();
-        $token=$user->createToken('main')->plainTextToken;
-        return response(compact('user', 'token'));
+        $token = $user->createToken('main')->plainTextToken;
+        return response([
+            'user' => $user,
+            'token' => $token
+        ]);
     }
 
-  
+
 
     public function logout(Request $request)
     {
         /** @var \App\Models\User */
-       $user = request()->user();
-       $user->currentAccessToken()->delete();
-       return response(['message'=>'Logged out']);
+        $user = request()->user();
+        $user->currentAccessToken()->delete();
+        return response(['message' => 'Logged out']);
     }
- 
 }
