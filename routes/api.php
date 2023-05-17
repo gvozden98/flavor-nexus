@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::any('/change-password', [AuthController::class, 'changePassword']);
 });
 
 Route::post('/signup', [AuthController::class, 'signup']);

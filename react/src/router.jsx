@@ -2,23 +2,25 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "./routes/home";
 import Signup from "./routes/signup";
 import Login from "./routes/login";
+import Profile from "./routes/Profile";
 import NotFound from "./routes/notFound";
-import DefaultLayout from "./components/defaultLayout";
-import GuestLayout from "./components/guestLayout";
-
+import DefaultLayout from "./components/DefaultLayout";
+import GuestLayout from "./components/GuestLayout";
 
 const Router = createBrowserRouter([
-
     {
         path: "/",
         element: <DefaultLayout />,
         children: [
             {
                 path: "/home",
-                element: <Home />
+                element: <Home />,
             },
-
-        ]
+            {
+                path: "/profile",
+                element: <Profile />,
+            },
+        ],
     },
     {
         path: "/",
@@ -26,18 +28,17 @@ const Router = createBrowserRouter([
         children: [
             {
                 path: "/signup",
-                element: <Signup />
+                element: <Signup />,
             },
             {
                 path: "/login",
-                element: <Login />
-            }
-        ]
+                element: <Login />,
+            },
+        ],
     },
     {
         path: "*",
-        element: <NotFound />
-    }
-
-])
+        element: <NotFound />,
+    },
+]);
 export default Router;

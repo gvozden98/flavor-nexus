@@ -49,7 +49,23 @@ class AuthController extends Controller
     {
         /** @var \App\Models\User */
         $user = request()->user();
-        $user->currentAccessToken()->delete();
+        $user->currentAccessToken()->delete(); //why is this undrlined red?
         return response(['message' => 'Logged out']);
+    }
+
+    // This works but it is not checking the password i think just the token...
+    public function changePassword(Request $request)
+    {
+        //$credentials = $request->validated();
+        // if (!Auth::attempt($credentials)) {
+        //     return response(['message' => 'Password is incorrect'], 422);
+        // }
+        /** @var \App\Models\User */
+        $user = Auth::user();
+
+
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return response($user);
     }
 }
