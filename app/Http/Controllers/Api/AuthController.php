@@ -64,6 +64,35 @@ class AuthController extends Controller
         }
         $user->password = Hash::make($request->change);
         $user->save();
-        return response($request->change);
+        return response(['message' => 'Password changed'], 200);
+    }
+
+    public function changeName(Request $request)
+    {
+        /** @var \App\Models\User */
+        $user = Auth::user();
+        if (!Hash::check($request->password, $user->password)) {
+            return response(['message' => 'Password is incorrect'], 422);
+        }
+        $user->name = $request->change;
+        $user->save();
+        return response([
+            'user' => $user,
+            'message' => 'Name changed'
+        ], 200);
+    }
+
+    public function deleteAcc(Request $request)
+    {
+        /** @var \App\Models\User */
+        $user = Auth::user();
+        if (!Hash::check($request->password, $user->password)) {
+            return response(['message' => 'Password is incorrect'], 422);
+        }
+        if (!Hash::check($request->change, $user->password)) {
+            return response(['message' => 'Passwords do not match'], 422);
+        }
+        $user->delete();
+        return response(['message' => 'Account deleted'], 200);
     }
 }

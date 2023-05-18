@@ -5,15 +5,17 @@ import { useRef } from "react";
 import { useState } from "react";
 
 export default function Profile() {
-    const { user, setUser } = useStateContext();
+    const { user, setUser, setToken } = useStateContext();
     const passwordRef = useRef();
     const changeRef = useRef();
-    const [typeOfChange, setTypeOfChange] = useState("");
+    const [typeOfChange, setTypeOfChange] = useState("password");
     const [errors, setErrors] = useState(null);
+    const [success, setSuccess] = useState(null);
 
     // button should not change the pass but just spawn the input field maybe
     function changePassword() {
         setErrors(null);
+        setSuccess(null);
         console.log("change password");
         const payload = {
             email: user.email,
@@ -24,6 +26,8 @@ export default function Profile() {
             .post("/change-password", payload)
             .then(({ data }) => {
                 console.log(data);
+                setSuccess(data.message);
+                passwordRef.current.value = "";
             })
             .catch((err) => {
                 console.log(err);
@@ -38,14 +42,75 @@ export default function Profile() {
             });
     }
     function changeName() {
-        setTypeOfChange(null);
+        setErrors(null);
+        setSuccess(null);
         console.log("change name");
+        const payload = {
+            name: user.name,
+            password: passwordRef.current.value,
+            change: changeRef.current.value,
+        };
+        axiosClient
+            .post("/change-name", payload)
+            .then(({ data }) => {
+                console.log(data);
+                setUser(data.user);
+                setSuccess(data.message);
+                passwordRef.current.value = "";
+            })
+            .catch((err) => {
+                console.log(err);
+                const response = err.response;
+                if (response && response.status === 422) {
+                    if (response.data.errors) {
+                        setErrors(response.data.errors); //set errors for the alert
+                    } else {
+                        setErrors({ email: [response.data.message] });
+                    }
+                }
+            });
     }
-    function deleteAccount() {}
+    function deleteAccount() {
+        setErrors(null);
+        setSuccess(null);
+        console.log("Delete account");
+        const payload = {
+            email: user.email,
+            password: passwordRef.current.value,
+            change: changeRef.current.value,
+        };
+        axiosClient
+            .post("/delete-acc", payload)
+            .then(({ data }) => {
+                console.log(data);
+                setSuccess(data.message);
+                passwordRef.current.value = "";
+                setUser({});
+                setToken(null);
+            })
+            .catch((err) => {
+                console.log(err);
+                const response = err.response;
+                if (response && response.status === 422) {
+                    if (response.data.errors) {
+                        setErrors(response.data.errors); //set errors for the alert
+                    } else {
+                        setErrors({ email: [response.data.message] });
+                    }
+                }
+            });
+    }
     function changeBtn() {
+        setSuccess(null);
         console.log("change btn");
         if (typeOfChange === "password") {
             changePassword();
+        }
+        if (typeOfChange === "name") {
+            changeName();
+        }
+        if (typeOfChange === "deleteAcc") {
+            deleteAccount();
         }
     }
     return (
@@ -83,21 +148,33 @@ export default function Profile() {
                                 <button
                                     type="button"
                                     className="btn color-accent"
-                                    onClick={() => setTypeOfChange("password")}
+                                    onClick={() => {
+                                        setTypeOfChange("password");
+                                        setSuccess(null);
+                                        setErrors(null);
+                                    }}
                                 >
                                     Change Password
                                 </button>
                                 <button
                                     type="button"
                                     className="btn color-secondary"
-                                    onClick={() => setTypeOfChange(null)}
+                                    onClick={() => {
+                                        setTypeOfChange("name");
+                                        setSuccess(null);
+                                        setErrors(null);
+                                    }}
                                 >
                                     Change Name
                                 </button>
                                 <button
                                     type="button"
                                     className="btn btn-danger"
-                                    onClick={deleteAccount}
+                                    onClick={() => {
+                                        setTypeOfChange("deleteAcc");
+                                        setSuccess(null);
+                                        setErrors(null);
+                                    }}
                                 >
                                     Delete Account
                                 </button>
@@ -112,6 +189,16 @@ export default function Profile() {
                                         {Object.keys(errors).map((key) => (
                                             <p key={key}>{errors[key][0]}</p>
                                         ))}
+                                    </div>
+                                </div>
+                            )}
+                            {success && (
+                                <div className="container mt-3">
+                                    <div
+                                        className="alert alert-success"
+                                        role="alert"
+                                    >
+                                        <p>{success}</p>
                                     </div>
                                 </div>
                             )}
@@ -131,25 +218,63 @@ export default function Profile() {
                                 </label>
                             </div>
                             <p className="card-text h5">
-                                New {typeOfChange ? "Password" : "Name"}
+                                {typeOfChange === "password"
+                                    ? "New Password"
+                                    : typeOfChange === "name"
+                                    ? "New Name"
+                                    : typeOfChange === "deleteAcc"
+                                    ? "Confirm Password"
+                                    : ""}
                             </p>
                             <div className="form-floating mb-3">
                                 <input
                                     ref={changeRef}
-                                    type={typeOfChange ? "Password" : "text"}
+                                    type={
+                                        typeOfChange === "password"
+                                            ? "password"
+                                            : typeOfChange === "deleteAcc"
+                                            ? "password"
+                                            : "text"
+                                    }
                                     className="form-control"
                                     id="floatingChange"
-                                    placeholder="New"
+                                    placeholder={
+                                        typeOfChange === "password"
+                                            ? "New Password"
+                                            : typeOfChange === "name"
+                                            ? "Name"
+                                            : typeOfChange === "deleteAcc"
+                                            ? "Confirm password"
+                                            : ""
+                                    }
                                 ></input>
                                 <label htmlFor="floatingChange">
-                                    New {typeOfChange ? "Password" : "Name"}
+                                    {typeOfChange === "password"
+                                        ? "New Password"
+                                        : typeOfChange === "name"
+                                        ? "New Name"
+                                        : typeOfChange === "deleteAcc"
+                                        ? "Confirm password"
+                                        : ""}
                                 </label>
                             </div>
                             <button
-                                className="btn color-primary"
+                                className={
+                                    typeOfChange === "deleteAcc"
+                                        ? "btn btn-danger"
+                                        : typeOfChange !== "deleteAcc"
+                                        ? "btn color-primary"
+                                        : "btn"
+                                }
                                 onClick={changeBtn}
                             >
-                                Change {typeOfChange ? "Password" : "Name"}
+                                {typeOfChange === "password"
+                                    ? "Change Password"
+                                    : typeOfChange === "name"
+                                    ? "Change Name"
+                                    : typeOfChange === "deleteAcc"
+                                    ? "Delete Account"
+                                    : ""}
                             </button>
                         </div>
                     </div>
