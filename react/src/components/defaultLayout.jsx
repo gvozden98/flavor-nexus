@@ -1,7 +1,7 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { useStateContext } from "../contexts/contextProvider";
 import { useEffect } from "react";
-import Navbar from "./navbar";
+import Navbar from "./Navbar";
 import axiosClient from "../axios-client";
 
 export default function DefaultLayout() {

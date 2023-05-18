@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\SignupRequest;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Auth\Events\Login;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Console\Logger\ConsoleLogger;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -53,19 +55,15 @@ class AuthController extends Controller
         return response(['message' => 'Logged out']);
     }
 
-    // This works but it is not checking the password i think just the token...
-    public function changePassword(Request $request)
+    public function changePassword(ChangePasswordRequest $request)
     {
-        //$credentials = $request->validated();
-        // if (!Auth::attempt($credentials)) {
-        //     return response(['message' => 'Password is incorrect'], 422);
-        // }
         /** @var \App\Models\User */
         $user = Auth::user();
-
-
-        $user->password = bcrypt($request->password);
+        if (!Hash::check($request->password, $user->password)) {
+            return response(['message' => 'Password is incorrect'], 422);
+        }
+        $user->password = Hash::make($request->change);
         $user->save();
-        return response($user);
+        return response($request->change);
     }
 }

@@ -8,15 +8,17 @@ export default function Profile() {
     const { user, setUser } = useStateContext();
     const passwordRef = useRef();
     const changeRef = useRef();
-    const { typeOfChange, setTypeOfChange } = useState("");
-    
+    const [typeOfChange, setTypeOfChange] = useState("");
+    const [errors, setErrors] = useState(null);
+
     // button should not change the pass but just spawn the input field maybe
     function changePassword() {
-        setTypeOfChange("password");
+        setErrors(null);
         console.log("change password");
         const payload = {
             email: user.email,
             password: passwordRef.current.value,
+            change: changeRef.current.value,
         };
         axiosClient
             .post("/change-password", payload)
@@ -25,13 +27,27 @@ export default function Profile() {
             })
             .catch((err) => {
                 console.log(err);
+                const response = err.response;
+                if (response && response.status === 422) {
+                    if (response.data.errors) {
+                        setErrors(response.data.errors); //set errors for the alert
+                    } else {
+                        setErrors({ email: [response.data.message] });
+                    }
+                }
             });
     }
     function changeName() {
-        setTypeOfChange("name");
+        setTypeOfChange(null);
         console.log("change name");
     }
     function deleteAccount() {}
+    function changeBtn() {
+        console.log("change btn");
+        if (typeOfChange === "password") {
+            changePassword();
+        }
+    }
     return (
         <div className="container mt-3">
             <div className="row">
@@ -67,14 +83,14 @@ export default function Profile() {
                                 <button
                                     type="button"
                                     className="btn color-accent"
-                                    onClick={changePassword}
+                                    onClick={() => setTypeOfChange("password")}
                                 >
                                     Change Password
                                 </button>
                                 <button
                                     type="button"
                                     className="btn color-secondary"
-                                    onClick={changeName}
+                                    onClick={() => setTypeOfChange(null)}
                                 >
                                     Change Name
                                 </button>
@@ -86,6 +102,19 @@ export default function Profile() {
                                     Delete Account
                                 </button>
                             </div>
+                            {/* display error for wrong login */}
+                            {errors && (
+                                <div className="container mt-3">
+                                    <div
+                                        className="alert alert-danger"
+                                        role="alert"
+                                    >
+                                        {Object.keys(errors).map((key) => (
+                                            <p key={key}>{errors[key][0]}</p>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                             <p className="card-text h5">
                                 Confirm your password to make changes
                             </p>
@@ -100,19 +129,28 @@ export default function Profile() {
                                 <label htmlFor="floatingPassword">
                                     Password
                                 </label>
-                                <div className="form-floating mb-3">
-                                    <input
-                                        ref={changeRef}
-                                        type="text"
-                                        className="form-control"
-                                        id="floatingChange"
-                                    ></input>
-                                    {/* This label needs to render on button click again probably useffect or smth like that*/}
-                                    <label htmlFor="floatingChange">
-                                        New {typeOfChange}
-                                    </label>
-                                </div>
                             </div>
+                            <p className="card-text h5">
+                                New {typeOfChange ? "Password" : "Name"}
+                            </p>
+                            <div className="form-floating mb-3">
+                                <input
+                                    ref={changeRef}
+                                    type={typeOfChange ? "Password" : "text"}
+                                    className="form-control"
+                                    id="floatingChange"
+                                    placeholder="New"
+                                ></input>
+                                <label htmlFor="floatingChange">
+                                    New {typeOfChange ? "Password" : "Name"}
+                                </label>
+                            </div>
+                            <button
+                                className="btn color-primary"
+                                onClick={changeBtn}
+                            >
+                                Change {typeOfChange ? "Password" : "Name"}
+                            </button>
                         </div>
                     </div>
                 </div>
