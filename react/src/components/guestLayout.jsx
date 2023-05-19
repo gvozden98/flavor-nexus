@@ -1,6 +1,6 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { useStateContext } from "../contexts/contextProvider";
-import Navbar from "./navbar";
+import Navbar from "./Navbar";
 
 export default function guestLayout() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
