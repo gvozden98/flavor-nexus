@@ -6,6 +6,8 @@ import Profile from "./routes/Profile";
 import NotFound from "./routes/notFound";
 import DefaultLayout from "./components/DefaultLayout";
 import GuestLayout from "./components/GuestLayout";
+import Fitness from "./routes/Fitness";
+import Eat from "./routes/Eat";
 
 const Router = createBrowserRouter([
     {
@@ -19,6 +21,14 @@ const Router = createBrowserRouter([
             {
                 path: "/profile",
                 element: <Profile />,
+            },
+            {
+                path: "/category/eat",
+                element: <Eat />,
+            },
+            {
+                path: "/category/fitness",
+                element: <Fitness />,
             },
         ],
     },

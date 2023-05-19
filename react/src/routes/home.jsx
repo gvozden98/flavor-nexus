@@ -5,6 +5,7 @@ export default function Home() {
             <div className="row">
                 <div className="col-xl-9" style={{ border: "1px solid red" }}>
                     <EatAndFitness
+                        link="/category/eat"
                         headerColor="color-primary"
                         header="Eat"
                         headers={["Recipes", "Reviews", "Education"]}
@@ -12,6 +13,7 @@ export default function Home() {
                         cardContents={[]}
                     />
                     <EatAndFitness
+                        link="/category/fitness"
                         headerColor="color-secondary"
                         header="Fitness"
                         headers={["Activities", "Exercises", "Education"]}

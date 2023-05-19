@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { styled } from "styled-components";
+import { Link } from "react-router-dom";
 
 const HeaderStyle = styled.div`
     background-color: {
@@ -7,14 +8,17 @@ const HeaderStyle = styled.div`
     font-family: "Zen Dots", cursive;
 `;
 
-function Eat({ header, headers, headerColor, cardTitles, cardContents }) {
+function Eat({ header, headers, headerColor, link, cardTitles, cardContents }) {
     return (
         <div className="card mb-3">
-            <HeaderStyle
-                className={`card-header text-start fs-5 ${headerColor}`}
-            >
-                {header}
-            </HeaderStyle>
+            {/* Can't disable link styling */}
+            <Link to={link} style={{ textDecoration: "none" }}>
+                <HeaderStyle
+                    className={`card-header text-start fs-5 ${headerColor}`}
+                >
+                    {header}
+                </HeaderStyle>
+            </Link>
 
             <div className="container">
                 <div className="row">
