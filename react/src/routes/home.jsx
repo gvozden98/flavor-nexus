@@ -1,6 +1,7 @@
 import EatCard from "../components/EatCard";
 import { useState, useEffect } from "react";
 import { getRecipe } from "../components/getRecipe";
+import { getReviews } from "../components/getReviews";
 
 export default function Home() {
     //const recipes = useRef(); // Ovde ćemo čuvati recepte koje dobijemo od API-ja
@@ -9,6 +10,8 @@ export default function Home() {
     const [numberOfIngridients, setNumberOfIngridients] = useState(5); // Ovde ćemo čuvati broj sastojaka
     const [diet, setDiet] = useState("balanced"); // Ovde ćemo čuvati dijetu
     const [random, setRandom] = useState(true); // Ovde ćemo čuvati da li su recepti random
+    // reviws
+    const [reviews, setReviews] = useState(null); // Ovde ćemo čuvati recenzije koje dobijemo od sopstvenog API-ja
 
     useEffect(() => {
         setTimeout(() => {
@@ -20,13 +23,14 @@ export default function Home() {
                         diet,
                         random
                     );
+                    const fetchedReviews = await getReviews();
+                    setReviews(fetchedReviews);
                     setRecipes(fetchedRecipes);
-                    //setRecipes(extractInfo(fetchedRecipes));
                     console.log(fetchedRecipes);
-                    // Ovde možete dalje obraditi dohvaćene recepte ili ažurirati stanje komponente
+                    console.log(fetchedReviews);
                 } catch (error) {
                     // Obrada greške ako se dogodi neuspešan zahtev
-                    console.error("Error fetching recipes:", error);
+                    console.error("Error fetching data:", error);
                 }
             };
             fetchData();
@@ -37,7 +41,7 @@ export default function Home() {
         <div className="container text-center mt-3">
             <div className="row">
                 <div className="col-xl-9" style={{ border: "1px solid red" }}>
-                    {recipes ? (
+                    {recipes && reviews ? (
                         <EatCard
                             link="/category/eat"
                             headerColor="color-primary"
@@ -58,6 +62,7 @@ export default function Home() {
                                 recipes.hits[0].recipe.ingredientLines,
                                 recipes.hits[0].recipe.ingredientLines,
                             ]}
+                            reviews={reviews}
                         />
                     ) : (
                         <p>Loading...</p>

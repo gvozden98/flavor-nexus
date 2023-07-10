@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+// eslint-disable-next-line react/prop-types
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -7,17 +7,7 @@ const HeaderStyle = styled.div`
     }
     font-family: "Zen Dots", cursive;
 `;
-
-function EatCard({
-    header,
-    headers,
-    headerColor,
-    link,
-    cardTitles,
-    cardImages,
-    cardContents,
-    reviews,
-}) {
+function Review({ review }) {
     return (
         <div className="card mb-3">
             {/* Can't disable link styling */}
@@ -60,20 +50,9 @@ function EatCard({
                             <div className="card-header text-start fs-6">
                                 {headers[1]}
                             </div>
-                            <img
-                                className="card-img-top"
-                                src={reviews[0].slika ? reviews[0].slika : ""}
-                                alt="Card image cap"
-                            ></img>
                             <div className="card-body">
-                                <h6 className="card-title">
-                                    {reviews[0].title
-                                        ? reviews[0].title
-                                        : "title"}
-                                </h6>
-                                <p className="card-text">
-                                    {reviews[0].uvod ? reviews[0].uvod : "uvod"}
-                                </p>
+                                <h6 className="card-title">Card title</h6>
+                                <p className="card-text"></p>
                             </div>
                         </div>
                     </div>
@@ -96,4 +75,4 @@ function EatCard({
     );
 }
 
-export default EatCard;
+export default Review;
