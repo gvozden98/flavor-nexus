@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
 
 const HeaderStyle = styled.div`
     background-color: {
@@ -8,7 +9,16 @@ const HeaderStyle = styled.div`
     font-family: "Zen Dots", cursive;
 `;
 
-function Eat({ header, headers, headerColor, link, cardTitles, cardContents }) {
+function EatAndFitness({
+    header,
+    headers,
+    headerColor,
+    link,
+    cardTitles,
+    cardImages,
+    cardContents,
+}) {
+    console.log(cardTitles);
     return (
         <div className="card mb-3">
             {/* Can't disable link styling */}
@@ -27,18 +37,19 @@ function Eat({ header, headers, headerColor, link, cardTitles, cardContents }) {
                             <div className="card-header text-start fs-6">
                                 {headers[0]}
                             </div>
+                            <img
+                                className="card-img-top"
+                                src={cardImages[0] ? cardImages[0] : ""}
+                                alt="Card image cap"
+                            ></img>
                             <div className="card-body">
                                 <h6 className="card-title">
-                                    Different tortilla wrap – recept koji želiš
-                                    nositi na posao
+                                    {/* {cardTitles[0] ? cardTitles[0] : "title"} */}
                                 </h6>
                                 <p className="card-text">
-                                    Da ti predstavim jedan ukusan i praktičan
-                                    recept za različite tortilla wrapove koje
-                                    ćeš jedva dočekati da poneseš sa sobom na
-                                    posao! Ovaj recept će oživjeti tvoju
-                                    uobičajenu ručnu pauzu i donijeti svježinu i
-                                    raznolikost u tvoj radni dan.
+                                    {/* {cardContents[0]
+                                        ? cardContents[0]
+                                        : "contents"} */}
                                 </p>
                             </div>
                         </div>
@@ -73,4 +84,4 @@ function Eat({ header, headers, headerColor, link, cardTitles, cardContents }) {
     );
 }
 
-export default Eat;
+export default EatAndFitness;
