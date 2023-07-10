@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
 
 const HeaderStyle = styled.div`
     background-color: {
@@ -9,7 +8,7 @@ const HeaderStyle = styled.div`
     font-family: "Zen Dots", cursive;
 `;
 
-function EatAndFitness({
+function EatCard({
     header,
     headers,
     headerColor,
@@ -18,7 +17,6 @@ function EatAndFitness({
     cardImages,
     cardContents,
 }) {
-    console.log(cardTitles);
     return (
         <div className="card mb-3">
             {/* Can't disable link styling */}
@@ -44,13 +42,15 @@ function EatAndFitness({
                             ></img>
                             <div className="card-body">
                                 <h6 className="card-title">
-                                    {/* {cardTitles[0] ? cardTitles[0] : "title"} */}
+                                    {cardTitles[0] ? cardTitles[0] : "title"}
                                 </h6>
-                                <p className="card-text">
-                                    {/* {cardContents[0]
-                                        ? cardContents[0]
-                                        : "contents"} */}
-                                </p>
+                                {cardContents[0].map((content, index) => {
+                                    return (
+                                        <li className="card-text" key={index}>
+                                            {content}
+                                        </li>
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>
@@ -84,4 +84,4 @@ function EatAndFitness({
     );
 }
 
-export default EatAndFitness;
+export default EatCard;
