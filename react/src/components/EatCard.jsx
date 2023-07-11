@@ -17,6 +17,7 @@ function EatCard({
     cardImages,
     cardContents,
     reviews,
+    education,
 }) {
     return (
         <div className="card mb-3">
@@ -83,15 +84,19 @@ function EatCard({
                                 {headers[2]}
                             </div>
                             <div className="card-body">
-                                <h6 className="card-title">Card title</h6>
-                                <p className="card-text"></p>
+                                <h6 className="card-title">
+                                    {education[0].title
+                                        ? education[0].title
+                                        : "Title"}
+                                </h6>
+                                {education[0].uvod ? education[0].uvod : "Body"}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="card-footer text-body-secondary">2 days ago</div>
+            <div className="card-footer text-body-secondary"></div>
         </div>
     );
 }

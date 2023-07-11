@@ -24,7 +24,7 @@ export default function DefaultLayout() {
         return <Navigate to="/login" />;
     }
 
-    console.log(user);
+    //console.log(user);
     return (
         <div>
             <Navbar user={user} onLogout={onLogout} />

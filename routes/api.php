@@ -4,8 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\EducationController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Middleware\OwnCors;
+use App\Models\Education;
 use App\Models\Reviews;
 
 /*
@@ -35,3 +37,4 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // Reviews
 Route::get('/reviews', [ReviewController::class, 'index']);
+Route::get('/education', [EducationController::class, 'index']);

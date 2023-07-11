@@ -2,6 +2,7 @@ import EatCard from "../components/EatCard";
 import { useState, useEffect } from "react";
 import { getRecipe } from "../components/getRecipe";
 import { getReviews } from "../components/getReviews";
+import { getEducation } from "../components/getEducation";
 
 export default function Home() {
     //const recipes = useRef(); // Ovde ćemo čuvati recepte koje dobijemo od API-ja
@@ -12,7 +13,8 @@ export default function Home() {
     const [random, setRandom] = useState(true); // Ovde ćemo čuvati da li su recepti random
     // reviws
     const [reviews, setReviews] = useState(null); // Ovde ćemo čuvati recenzije koje dobijemo od sopstvenog API-ja
-
+    // education
+    const [education, setEducation] = useState(null); // Ovde ćemo čuvati edukaciju koju dobijemo od sopstvenog API-ja
     useEffect(() => {
         setTimeout(() => {
             const fetchData = async () => {
@@ -24,10 +26,13 @@ export default function Home() {
                         random
                     );
                     const fetchedReviews = await getReviews();
+                    const fetchedEducation = await getEducation();
                     setReviews(fetchedReviews);
                     setRecipes(fetchedRecipes);
+                    setEducation(fetchedEducation);
                     console.log(fetchedRecipes);
                     console.log(fetchedReviews);
+                    console.log(fetchedEducation);
                 } catch (error) {
                     // Obrada greške ako se dogodi neuspešan zahtev
                     console.error("Error fetching data:", error);
@@ -63,6 +68,7 @@ export default function Home() {
                                 recipes.hits[0].recipe.ingredientLines,
                             ]}
                             reviews={reviews}
+                            education={education}
                         />
                     ) : (
                         <p>Loading...</p>
