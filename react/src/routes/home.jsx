@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { getRecipe } from "../components/getRecipe";
 import { getReviews } from "../components/getReviews";
 import { getEducation } from "../components/getEducation";
+import Loading from "../components/loading";
 
 export default function Home() {
     //const recipes = useRef(); // Ovde ćemo čuvati recepte koje dobijemo od API-ja
@@ -39,9 +40,9 @@ export default function Home() {
                 }
             };
             fetchData();
-        }, 2000);
+        }, 1000);
     }, []);
-    //if (recipes === undefined) return <h1>Loading...</h1>;
+    
     return (
         <div className="container text-center mt-3">
             <div className="row">
@@ -71,7 +72,7 @@ export default function Home() {
                             education={education}
                         />
                     ) : (
-                        <p>Loading...</p>
+                        <Loading />
                     )}
                     {/* <EatAndFitness
                         link="/category/fitness"

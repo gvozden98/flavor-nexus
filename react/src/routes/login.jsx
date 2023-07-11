@@ -30,7 +30,7 @@ export default function Login() {
             .then(({ data }) => {
                 setToken(data.token);
                 setUser(data.user);
-                //console.log(data);
+                console.log(data);
             })
             .catch((err) => {
                 console.log(err);

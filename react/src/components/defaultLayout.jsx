@@ -28,7 +28,8 @@ export default function DefaultLayout() {
     return (
         <div>
             <Navbar user={user} onLogout={onLogout} />
-            <Outlet />
+            {/* context salje podatke svoj njegovoj deci */}
+            <Outlet context={[user]} />
         </div>
     );
 }

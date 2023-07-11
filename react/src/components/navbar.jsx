@@ -7,6 +7,7 @@ const Brand = styled.span`
 `;
 
 function Navbar(props) {
+    console.log(props.user);
     return (
         <nav className="navbar navbar-expand-xl color-primary">
             <div className="container-fluid">
@@ -42,19 +43,40 @@ function Navbar(props) {
                             </Link>
                         </li>
                         <li className="nav-item fs-5 text">
-                            <a
-                                className="nav-link disabled fs-5 text"
+                            <Link
+                                to="/eat/reviews"
+                                //class name disabled removed
+                                className="nav-link fs-5 text"
                                 href="#"
-                                tabIndex="-1"
-                                aria-disabled="true"
+                                // tabIndex="-1"
+                                // aria-disabled="true"
                             >
-                                Disabled
-                            </a>
+                                Reviews
+                            </Link>
+                        </li>
+                        <li className="nav-item fs-5 text">
+                            <Link
+                                to="/category/eat"
+                                //class name disabled removed
+                                className="nav-link fs-5 text"
+                                href="#"
+                                // tabIndex="-1"
+                                // aria-disabled="true"
+                            >
+                                Recipes
+                            </Link>
                         </li>
                     </ul>
+                    {/* new review */}
+                    <Link to="/eat/reviews/new" state={props.user}>
+                        <button className="btn mx-2 color-secondary accent-button fs-5 text">
+                            New Review
+                        </button>
+                    </Link>
                     <span className="navbar-text fs-5 text ">
                         {props.user ? props.user.email : ""}
                     </span>
+                    {/* logout */}
                     <button
                         className="btn mx-2 color-accent accent-button fs-5 text"
                         onClick={props.onLogout}
