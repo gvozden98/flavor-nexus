@@ -8,7 +8,7 @@ const HeaderStyle = styled.div`
     font-family: "Zen Dots", cursive;
 `;
 
-function EatCard({
+function EatHomeCard({
     header,
     headers,
     headerColor,
@@ -58,9 +58,11 @@ function EatCard({
                     </div>
                     <div className="col-lg-4">
                         <div className="card my-2">
-                            <div className="card-header text-start fs-6">
-                                {headers[1]}
-                            </div>
+                            <Link to="/eat/reviews">
+                                <div className="card-header text-start fs-6">
+                                    {headers[1]}
+                                </div>
+                            </Link>
                             <img
                                 className="card-img-top"
                                 src={reviews[0].slika ? reviews[0].slika : ""}
@@ -101,4 +103,4 @@ function EatCard({
     );
 }
 
-export default EatCard;
+export default EatHomeCard;

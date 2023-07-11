@@ -5,17 +5,17 @@ import Pagination from "../components/pagination";
 import { useLocation } from "react-router-dom";
 export default function Eat() {
     const [recipes, setRecipes] = useState(null); // Ovde ćemo čuvati recepte koje dobijemo od API-ja
-
     const [query, setQuery] = useState(""); // Ovde ćemo čuvati trenutni upit
     const [numberOfIngridients, setNumberOfIngridients] = useState(5); // Ovde ćemo čuvati broj sastojaka
     const [diet, setDiet] = useState("balanced"); // Ovde ćemo čuvati dijetu
     const [random, setRandom] = useState(false); // Ovde ćemo čuvati da li su recepti random
+    
     //router
-
     const location = useLocation();
     const nextPage = location.state?.nextPage;
     console.log(location);
     console.log(nextPage);
+
     useEffect(() => {
         setTimeout(() => {
             const fetchData = async () => {

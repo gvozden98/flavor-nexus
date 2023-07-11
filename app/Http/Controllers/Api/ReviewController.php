@@ -15,7 +15,8 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        return Reviews::all();
+        $data =  Reviews::all();
+        return response()->json($data);
     }
 
     /**

@@ -1,76 +1,66 @@
-// eslint-disable-next-line react/prop-types
-import { styled } from "styled-components";
-import { Link } from "react-router-dom";
-
-const HeaderStyle = styled.div`
-    background-color: {
+/* eslint-disable react/prop-types */
+function Review({ reviews }) {
+    {
+        reviews ? console.log(reviews) : console.log("no reviews");
     }
-    font-family: "Zen Dots", cursive;
-`;
-function Review({ review }) {
     return (
-        <div className="card mb-3">
-            {/* Can't disable link styling */}
-            <Link to={link} style={{ textDecoration: "none" }}>
-                <HeaderStyle
-                    className={`card-header text-start fs-5 ${headerColor}`}
-                >
-                    {header}
-                </HeaderStyle>
-            </Link>
-
-            <div className="container">
-                <div className="row">
-                    <div className="col-lg-4">
-                        <div className="card my-2">
-                            <div className="card-header text-start fs-6">
-                                {headers[0]}
-                            </div>
-                            <img
-                                className="card-img-top"
-                                src={cardImages[0] ? cardImages[0] : ""}
-                                alt="Card image cap"
-                            ></img>
-                            <div className="card-body">
-                                <h6 className="card-title">
-                                    {cardTitles[0] ? cardTitles[0] : "title"}
-                                </h6>
-                                {cardContents[0].map((content, index) => {
-                                    return (
-                                        <li className="card-text" key={index}>
-                                            {content}
-                                        </li>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-4">
-                        <div className="card my-2">
-                            <div className="card-header text-start fs-6">
-                                {headers[1]}
-                            </div>
-                            <div className="card-body">
-                                <h6 className="card-title">Card title</h6>
-                                <p className="card-text"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-4">
-                        <div className="card my-2">
-                            <div className="card-header text-start fs-6">
-                                {headers[2]}
-                            </div>
-                            <div className="card-body">
-                                <h6 className="card-title">Card title</h6>
-                                <p className="card-text"></p>
+        <div className="container text-center mt-3">
+            <div className="row">
+                <div className="col-xl-9" style={{ border: "1px solid red" }}>
+                    <div className="card mb-3">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col">
+                                    {/* nisi zavrsio ovo  */}
+                                    {reviews.map((review, index) => {
+                                        return (
+                                            <div
+                                                className="card my-2"
+                                                key={index}
+                                            >
+                                                <div className="card-header text-start fs-2">
+                                                    {review.title}
+                                                </div>
+                                                <img
+                                                    src={review.slika}
+                                                    alt="Slika proizvoda"
+                                                />
+                                                <div
+                                                    className="card-body"
+                                                    style={{
+                                                        textAlign: "left",
+                                                    }}
+                                                >
+                                                    <p>{review.uvod}</p>
+                                                    <h3>Sastav</h3>
+                                                    <p>{review.sastav}</p>
+                                                    <h3>Cena</h3>
+                                                    <p>{review.cena}</p>
+                                                    <h3>Ukus i tekstura</h3>
+                                                    <p>{review.ukus}</p>
+                                                    <h3>Dizajn</h3>
+                                                    <p>{review.dizajn}</p>
+                                                    <h3>Zakljucak</h3>
+                                                    <p>{review.zakljucak}</p>
+                                                    <br />
+                                                    <p></p>
+                                                </div>
+                                                <div className="card-footer text-body-secondary">
+                                                    <p></p>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div
+                    className="col-xl-3"
+                    style={{ border: "1px solid red" }}
+                ></div>
             </div>
-
-            <div className="card-footer text-body-secondary">2 days ago</div>
         </div>
     );
 }

@@ -8,6 +8,7 @@ import DefaultLayout from "./components/DefaultLayout";
 import GuestLayout from "./components/GuestLayout";
 import Fitness from "./routes/Fitness";
 import Eat from "./routes/Eat";
+import Reviews from "./routes/Reviews";
 
 const Router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const Router = createBrowserRouter([
             {
                 path: "/category/eat",
                 element: <Eat />,
+            },
+            {
+                path: "/eat/reviews",
+                element: <Reviews />,
             },
             {
                 path: "/category/fitness",

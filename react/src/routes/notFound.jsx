@@ -49,7 +49,7 @@ function NotFound() {
       <NotFoundTitle>404 - error</NotFoundTitle>
       <NotFoundDescription>The page you requested could not be found.</NotFoundDescription>
       <Link to={{
-        pathname: "/"
+        pathname: "/home"
       }} ><Button>Go Back Home</Button></Link>
      
     </NotFoundContainer>

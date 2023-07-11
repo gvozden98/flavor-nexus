@@ -1,4 +1,4 @@
-import EatCard from "../components/EatCard";
+import EatHomeCard from "../components/EatHomeCard";
 import { useState, useEffect } from "react";
 import { getRecipe } from "../components/getRecipe";
 import { getReviews } from "../components/getReviews";
@@ -47,7 +47,7 @@ export default function Home() {
             <div className="row">
                 <div className="col-xl-9" style={{ border: "1px solid red" }}>
                     {recipes && reviews ? (
-                        <EatCard
+                        <EatHomeCard
                             link="/category/eat"
                             headerColor="color-primary"
                             header="Eat"
