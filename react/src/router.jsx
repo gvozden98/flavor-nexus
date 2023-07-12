@@ -6,7 +6,6 @@ import Profile from "./routes/Profile";
 import NotFound from "./routes/notFound";
 import DefaultLayout from "./components/DefaultLayout";
 import GuestLayout from "./components/GuestLayout";
-import Fitness from "./routes/Fitness";
 import Eat from "./routes/Eat";
 import Reviews from "./routes/Reviews";
 import NewReview from "./components/NewReview";
@@ -45,10 +44,6 @@ const Router = createBrowserRouter([
             {
                 path: "/eat/recipes/new",
                 element: <NewOriginalRecipe />,
-            },
-            {
-                path: "/category/fitness",
-                element: <Fitness />,
             },
         ],
     },

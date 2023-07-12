@@ -8,6 +8,7 @@ export const getRecipe = async (
     nextPage
 ) => {
     try {
+        //Ako treba sledeca strana, salje se ovaj zahtev
         if (nextPage) {
             const response = await axios.get(nextPage);
             return response.data;

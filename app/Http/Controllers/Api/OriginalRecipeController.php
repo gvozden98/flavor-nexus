@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\OriginalRecipe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class OriginalRecipeController extends Controller
 {
@@ -21,6 +23,7 @@ class OriginalRecipeController extends Controller
      */
     public function store(Request $request)
     {
+
         $recipe = OriginalRecipe::create([
             'user_id' => $request->user_id,
             'title' => $request->title,
