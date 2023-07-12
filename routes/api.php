@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\EducationController;
+use App\Http\Controllers\Api\OriginalRecipeController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Middleware\OwnCors;
 use App\Models\Education;
@@ -30,7 +31,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/change-password', [AuthController::class, 'changePassword']);
     Route::post('/change-name', [AuthController::class, 'changeName']);
     Route::post('/delete-acc', [AuthController::class, 'deleteAcc']);
+;
 });
+//new content
+Route::any('/newReview', [ReviewController::class, 'store']);
+Route::any('/newOriginalRecipe', [OriginalRecipeController::class, 'store']);
+
+// Original Recipes
+Route::any('/originalRecipes', [OriginalRecipeController::class, 'index']);
+
+
 
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);

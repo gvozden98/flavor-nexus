@@ -66,9 +66,26 @@ function Navbar(props) {
                                 Recipes
                             </Link>
                         </li>
+                        <li className="nav-item fs-5 text">
+                            <Link
+                                to="/eat/recipes"
+                                //class name disabled removed
+                                className="nav-link fs-5 text"
+                                href="#"
+                                // tabIndex="-1"
+                                // aria-disabled="true"
+                            >
+                                <Brand>Fllavor Nexus Recipes</Brand>
+                            </Link>
+                        </li>
                     </ul>
                     {/* new review */}
-                    <Link to="/eat/reviews/new" state={props.user}>
+                    <Link to="/eat/recipes/new">
+                        <button className="btn mx-2 btn-primary fs-5 text">
+                            New Recipe
+                        </button>
+                    </Link>
+                    <Link to="/eat/reviews/new">
                         <button className="btn mx-2 color-secondary accent-button fs-5 text">
                             New Review
                         </button>

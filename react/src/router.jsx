@@ -10,6 +10,8 @@ import Fitness from "./routes/Fitness";
 import Eat from "./routes/Eat";
 import Reviews from "./routes/Reviews";
 import NewReview from "./components/NewReview";
+import OriginalRecipes from "./routes/OriginalRecipes";
+import NewOriginalRecipe from "./components/NewOriginalRecipe";
 
 const Router = createBrowserRouter([
     {
@@ -35,6 +37,14 @@ const Router = createBrowserRouter([
             {
                 path: "/eat/reviews/new",
                 element: <NewReview />,
+            },
+            {
+                path: "/eat/recipes",
+                element: <OriginalRecipes />,
+            },
+            {
+                path: "/eat/recipes/new",
+                element: <NewOriginalRecipe />,
             },
             {
                 path: "/category/fitness",

@@ -1,24 +1,22 @@
 import { useState } from "react";
-import { putReview } from "./putReview";
 import { useOutletContext } from "react-router-dom";
+import { putOriginalRecipe } from "./putOriginalRecipe";
 
-function NewReview() {
-    //outlet context omogucava da se podaci proslede iz jednog komponenta u drugi, user u ovom slucaju
+function NewRecipe() {
     const [user] = useOutletContext();
     const [formData, setFormData] = useState({
         user_id: user.id,
         title: "",
-        uvod: "",
-        sastav: "",
-        cena: "",
-        ukus: "",
-        dizajn: "",
-        zakljucak: "",
+        opis: "",
+        slika: "",
+        vreme: "",
+        sastojci: "",
+        uputstvo: "",
     });
     const handleFormSubmit = (event) => {
         event.preventDefault();
         // Perform form submission actions here, such as API requests or validation
-        putReview(formData);
+        putOriginalRecipe(formData);
         console.log(formData);
     };
     const handleInputChange = (event) => {
@@ -48,7 +46,7 @@ function NewReview() {
                                             >
                                                 <div className="form-group">
                                                     <label
-                                                        htmlFor="formGroupExampleInput"
+                                                        htmlFor="title"
                                                         className="fs-4"
                                                     >
                                                         Title:
@@ -66,17 +64,17 @@ function NewReview() {
                                                 </div>
                                                 <div className="form-group">
                                                     <label
-                                                        htmlFor="formGroupExampleInput2"
+                                                        htmlFor="opis"
                                                         className="fs-4"
                                                     >
-                                                        Uvod:
+                                                        Opis:
                                                     </label>
                                                     <input
                                                         type="text"
                                                         className="form-control"
-                                                        id="uvod"
-                                                        name="uvod"
-                                                        value={formData.uvod}
+                                                        id="opis"
+                                                        name="opis"
+                                                        value={formData.opis}
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -84,36 +82,18 @@ function NewReview() {
                                                 </div>
                                                 <div className="form-group">
                                                     <label
-                                                        htmlFor="formGroupExampleInput2"
+                                                        htmlFor="sastojci"
                                                         className="fs-4"
                                                     >
-                                                        Sastav:
+                                                        Vreme:
                                                     </label>
-                                                    <textarea
+                                                    <input
                                                         rows="4"
                                                         type="text"
                                                         className="form-control"
-                                                        id="sastav"
-                                                        name="sastav"
-                                                        value={formData.sastav}
-                                                        onChange={
-                                                            handleInputChange
-                                                        }
-                                                    ></textarea>
-                                                </div>
-                                                <div className="form-group">
-                                                    <label
-                                                        htmlFor="formGroupExampleInput2"
-                                                        className="fs-4"
-                                                    >
-                                                        Cena:
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        id="cena"
-                                                        name="cena"
-                                                        value={formData.cena}
+                                                        id="vreme"
+                                                        name="vreme"
+                                                        value={formData.vreme}
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -121,63 +101,47 @@ function NewReview() {
                                                 </div>
                                                 <div className="form-group">
                                                     <label
-                                                        htmlFor="formGroupExampleInput2"
+                                                        htmlFor="sastojci"
                                                         className="fs-4"
                                                     >
-                                                        Ukus:
+                                                        Sastojci:
                                                     </label>
                                                     <textarea
                                                         rows="4"
                                                         type="text"
                                                         className="form-control"
-                                                        id="ukus"
-                                                        name="ukus"
-                                                        value={formData.ukus}
-                                                        onChange={
-                                                            handleInputChange
-                                                        }
-                                                    ></textarea>
-                                                </div>
-                                                <div className="form-group">
-                                                    <label
-                                                        htmlFor="formGroupExampleInput2"
-                                                        className="fs-4"
-                                                    >
-                                                        Dizajn:
-                                                    </label>
-                                                    <textarea
-                                                        rows="4"
-                                                        type="text"
-                                                        className="form-control"
-                                                        id="dizajn"
-                                                        name="dizajn"
-                                                        value={formData.dizajn}
-                                                        onChange={
-                                                            handleInputChange
-                                                        }
-                                                    ></textarea>
-                                                </div>
-                                                <div className="form-group">
-                                                    <label
-                                                        htmlFor="formGroupExampleInput2"
-                                                        className="fs-4"
-                                                    >
-                                                        Zakljucak:
-                                                    </label>
-                                                    <textarea
-                                                        rows="4"
-                                                        type="text"
-                                                        className="form-control"
-                                                        id="zakljucak"
-                                                        name="zakljucak"
+                                                        id="sastojci"
+                                                        name="sastojci"
                                                         value={
-                                                            formData.zakljucak
+                                                            formData.sastojci
                                                         }
                                                         onChange={
                                                             handleInputChange
                                                         }
                                                     ></textarea>
                                                 </div>
+                                                <div className="form-group">
+                                                    <label
+                                                        htmlFor="uputstvo"
+                                                        className="fs-4"
+                                                    >
+                                                        Uputstvo:
+                                                    </label>
+                                                    <textarea
+                                                        rows="4"
+                                                        type="text"
+                                                        className="form-control"
+                                                        id="uputstvo"
+                                                        name="uputstvo"
+                                                        value={
+                                                            formData.uputstvo
+                                                        }
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                    ></textarea>
+                                                </div>
+
                                                 <br />
                                                 <div className="text-center">
                                                     <button
@@ -207,4 +171,4 @@ function NewReview() {
     );
 }
 
-export default NewReview;
+export default NewRecipe;

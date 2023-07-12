@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('original_recipes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('slika')->nullable();
-            $table->longText("title");
-            $table->longText("uvod");
-            $table->longText("sastav");
-            $table->longText("cena");
-            $table->longText("ukus");
-            $table->longText("dizajn");
-            $table->longText("zakljucak");
+            $table->string('title');
+            $table->text('opis');
+            $table->string('slika');
+            $table->string('vreme');
+            $table->longText('sastojci');
+            $table->longText('uputstvo');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('original_recipes');
     }
 };

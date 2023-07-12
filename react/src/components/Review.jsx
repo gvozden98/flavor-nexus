@@ -1,8 +1,21 @@
 /* eslint-disable react/prop-types */
+import { useOutletContext } from "react-router-dom";
 function Review({ reviews }) {
-    {
-        reviews ? console.log(reviews) : console.log("no reviews");
-    }
+    const [user] = useOutletContext();
+    const formatDatetime = (datetime) => {
+        const formattedDatetime = new Date(datetime).toLocaleString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+        });
+        console.log(formattedDatetime);
+        return formattedDatetime;
+    };
+    reviews ? console.log(reviews) : console.log("no reviews");
+
     return (
         <div className="container text-center mt-3">
             <div className="row">
@@ -21,10 +34,14 @@ function Review({ reviews }) {
                                                 <div className="card-header text-start fs-2">
                                                     {review.title}
                                                 </div>
-                                                <img
-                                                    src={review.slika}
-                                                    alt="Slika proizvoda"
-                                                />
+                                                {review.slika ? (
+                                                    <img
+                                                        src={review.slika}
+                                                        alt="Slika proizvoda"
+                                                    />
+                                                ) : (
+                                                    <></>
+                                                )}
                                                 <div
                                                     className="card-body"
                                                     style={{
@@ -46,7 +63,13 @@ function Review({ reviews }) {
                                                     <p></p>
                                                 </div>
                                                 <div className="card-footer text-body-secondary">
-                                                    <p></p>
+                                                    <p>
+                                                        {formatDatetime(
+                                                            review.created_at
+                                                        )}{" "}
+                                                        {/* Mora da se ide u bazu ovde,ovo vraca aktivnog usera, a ne onog ko je napisao review */}
+                                                        by {user.email}
+                                                    </p>
                                                 </div>
                                             </div>
                                         );
