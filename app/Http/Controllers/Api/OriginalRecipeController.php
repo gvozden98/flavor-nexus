@@ -61,8 +61,7 @@ class OriginalRecipeController extends Controller
         $originalRecipe = OriginalRecipe::where('id', $request->originalRecipeId);
         $originalRecipe->delete();
         return response([
-            'message' => 'Original recipe deleted',
-            'review' => $originalRecipe
+            'message' => 'Original recipe deleted'
         ]);
     }
 }

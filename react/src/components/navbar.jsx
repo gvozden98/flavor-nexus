@@ -75,7 +75,7 @@ function Navbar(props) {
                                 // tabIndex="-1"
                                 // aria-disabled="true"
                             >
-                                <Brand>Fllavor Nexus Recipes</Brand>
+                                <Brand>Flavor Nexus Recipes</Brand>
                             </Link>
                         </li>
                     </ul>

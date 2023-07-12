@@ -26,14 +26,14 @@ function NewRecipe() {
     return (
         <div className="container text-center mt-3">
             <div className="row">
-                <div className="col-xl-9" style={{ border: "1px solid red" }}>
+                <div className="col">
                     <div className="card mb-3">
                         <div className="container">
                             <div className="row">
                                 <div className="col">
                                     <div className="card my-2">
                                         <div className="card-header text-start fs-2">
-                                            New Review
+                                            New Recipe
                                         </div>
 
                                         <div
@@ -162,10 +162,10 @@ function NewRecipe() {
                         </div>
                     </div>
                 </div>
-                <div
+                {/* <div
                     className="col-xl-3"
                     style={{ border: "1px solid red" }}
-                ></div>
+                ></div> */}
             </div>
         </div>
     );

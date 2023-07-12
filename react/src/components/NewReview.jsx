@@ -28,7 +28,7 @@ function NewReview() {
     return (
         <div className="container text-center mt-3">
             <div className="row">
-                <div className="col-xl-9" style={{ border: "1px solid red" }}>
+                <div className="col">
                     <div className="card mb-3">
                         <div className="container">
                             <div className="row">
@@ -198,10 +198,10 @@ function NewReview() {
                         </div>
                     </div>
                 </div>
-                <div
+                {/* <div
                     className="col-xl-3"
                     style={{ border: "1px solid red" }}
-                ></div>
+                ></div> */}
             </div>
         </div>
     );

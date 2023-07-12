@@ -30,7 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/change-password', [AuthController::class, 'changePassword']);
     Route::post('/change-name', [AuthController::class, 'changeName']);
-    Route::post('/delete-acc', [AuthController::class, 'deleteAcc']);;
+    Route::post('/delete-acc', [AuthController::class, 'deleteAcc']);
 });
 //new content
 Route::any('/newReview', [ReviewController::class, 'store']);
