@@ -30,8 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/change-password', [AuthController::class, 'changePassword']);
     Route::post('/change-name', [AuthController::class, 'changeName']);
-    Route::post('/delete-acc', [AuthController::class, 'deleteAcc']);
-;
+    Route::post('/delete-acc', [AuthController::class, 'deleteAcc']);;
 });
 //new content
 Route::any('/newReview', [ReviewController::class, 'store']);
@@ -39,6 +38,7 @@ Route::any('/newOriginalRecipe', [OriginalRecipeController::class, 'store']);
 
 // Original Recipes
 Route::any('/originalRecipes', [OriginalRecipeController::class, 'index']);
+Route::any('/deleteOriginalRecipe', [OriginalRecipeController::class, 'destroy']);
 
 
 
@@ -47,4 +47,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // Reviews
 Route::get('/reviews', [ReviewController::class, 'index']);
+Route::any('/deleteReview', [ReviewController::class, 'destroy']);
+
+// Education
 Route::get('/education', [EducationController::class, 'index']);

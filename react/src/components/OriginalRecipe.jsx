@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useOutletContext } from "react-router-dom";
+import { deleteOriginalRecipe } from "./deleteOriginalRecipe";
 function OriginalRecipe({ originalRecipes }) {
     const [user] = useOutletContext();
     const formatDatetime = (datetime) => {
@@ -19,7 +20,7 @@ function OriginalRecipe({ originalRecipes }) {
     return (
         <div className="container text-center mt-3">
             <div className="row">
-                <div className="col-xl-9" style={{ border: "1px solid red" }}>
+                <div className="col">
                     <div className="card mb-3">
                         <div className="container">
                             <div className="row">
@@ -80,6 +81,29 @@ function OriginalRecipe({ originalRecipes }) {
 
                                                         <br />
                                                         <p></p>
+                                                        {user.admin === 1 ? (
+                                                            <button
+                                                                type="button"
+                                                                className="btn btn-danger"
+                                                                onClick={() => {
+                                                                    deleteOriginalRecipe(
+                                                                        originalRecipe.id
+                                                                    );
+                                                                    setTimeout(
+                                                                        () => {
+                                                                            window.location.reload(
+                                                                                true
+                                                                            );
+                                                                        },
+                                                                        500
+                                                                    );
+                                                                }}
+                                                            >
+                                                                Delete
+                                                            </button>
+                                                        ) : (
+                                                            <></>
+                                                        )}
                                                     </div>
                                                     <div className="card-footer text-body-secondary">
                                                         <p>

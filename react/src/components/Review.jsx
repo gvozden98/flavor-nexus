@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useOutletContext } from "react-router-dom";
+import { deleteReview } from "./deleteReview";
+
 function Review({ reviews }) {
     const [user] = useOutletContext();
     const formatDatetime = (datetime) => {
@@ -14,12 +16,17 @@ function Review({ reviews }) {
         console.log(formattedDatetime);
         return formattedDatetime;
     };
+    // const handleReviewDeletion = (id) => {
+    //     deleteReview(id);
+    // };
+
     reviews ? console.log(reviews) : console.log("no reviews");
+    user.admin === 1 ? console.log("admin") : console.log("not admin");
 
     return (
         <div className="container text-center mt-3">
             <div className="row">
-                <div className="col-xl-9" style={{ border: "1px solid red" }}>
+                <div className="col">
                     <div className="card mb-3">
                         <div className="container">
                             <div className="row">
@@ -61,6 +68,30 @@ function Review({ reviews }) {
                                                     <p>{review.zakljucak}</p>
                                                     <br />
                                                     <p></p>
+                                                    {/* Delete review and refresh the page */}
+                                                    {user.admin === 1 ? (
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-danger"
+                                                            onClick={() => {
+                                                                deleteReview(
+                                                                    review.id
+                                                                );
+                                                                setTimeout(
+                                                                    () => {
+                                                                        window.location.reload(
+                                                                            true
+                                                                        );
+                                                                    },
+                                                                    500
+                                                                );
+                                                            }}
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    ) : (
+                                                        <></>
+                                                    )}
                                                 </div>
                                                 <div className="card-footer text-body-secondary">
                                                     <p>
@@ -79,10 +110,10 @@ function Review({ reviews }) {
                         </div>
                     </div>
                 </div>
-                <div
+                {/* <div
                     className="col-xl-3"
                     style={{ border: "1px solid red" }}
-                ></div>
+                ></div> */}
             </div>
         </div>
     );

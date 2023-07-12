@@ -26,6 +26,7 @@ class SignupRequest extends FormRequest
             'name' => ['required', 'string'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required','confirmed','string',Password::min(3)],
+            'admin' => ['nullable', 'boolean'],
         ];
     }
 }

@@ -13,6 +13,7 @@ export default function Signup() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmationRef = useRef();
+    const adminCheckboxRef = useRef();
     const [errors, setErrors] = useState(null);
     const { setToken, setUser } = useStateContext();
     const onSubmit = (e) => {
@@ -22,6 +23,7 @@ export default function Signup() {
             email: emailRef.current.value,
             password: passwordRef.current.value,
             password_confirmation: passwordConfirmationRef.current.value,
+            admin: adminCheckboxRef.current.checked,
         };
 
         console.log(payload);
@@ -112,6 +114,22 @@ export default function Signup() {
                                         Password confirmation
                                     </label>
                                 </div>
+                                <div className="form-check">
+                                    <input
+                                        ref={adminCheckboxRef}
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        value=""
+                                        id="adminCheckbox"
+                                    ></input>
+                                    <label
+                                        className="form-check-label"
+                                        htmlFor="adminCheckbox"
+                                    >
+                                        Admin
+                                    </label>
+                                </div>
+                                <br />
                                 <button
                                     type="submit"
                                     className="btn color-accent accent-button mx-2 px-2 mb-2"

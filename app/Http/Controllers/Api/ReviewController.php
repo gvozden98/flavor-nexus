@@ -7,6 +7,7 @@ use App\Models\Reviews;
 use App\Http\Requests\StoreReviewRequest;
 use App\Http\Requests\UpdateReviewRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
@@ -67,8 +68,14 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Reviews $review)
+    public function destroy(Request $request)
     {
-        //
+
+        $review = Reviews::where('id', $request->reviewId);
+        $review->delete();
+        return response([
+            'message' => 'Review deleted',
+            'review' => $review
+        ]);
     }
 }

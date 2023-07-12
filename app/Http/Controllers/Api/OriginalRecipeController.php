@@ -56,8 +56,13 @@ class OriginalRecipeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $originalRecipe = OriginalRecipe::where('id', $request->originalRecipeId);
+        $originalRecipe->delete();
+        return response([
+            'message' => 'Original recipe deleted',
+            'review' => $originalRecipe
+        ]);
     }
 }

@@ -3,8 +3,6 @@ import Review from "../components/Review";
 import { getReviews } from "../components/getReviews";
 import Loading from "../components/loading";
 
-
-
 function Reviews() {
     const [reviews, setReviews] = useState(null);
     useEffect(() => {

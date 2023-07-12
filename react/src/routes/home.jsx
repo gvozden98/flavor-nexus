@@ -42,11 +42,11 @@ export default function Home() {
             fetchData();
         }, 1000);
     }, []);
-    
+
     return (
         <div className="container text-center mt-3">
             <div className="row">
-                <div className="col-xl-9" style={{ border: "1px solid red" }}>
+                <div className="col">
                     {recipes && reviews ? (
                         <EatHomeCard
                             link="/category/eat"
@@ -83,10 +83,10 @@ export default function Home() {
                         cardContents={[]}
                     /> */}
                 </div>
-                <div
+                {/* <div
                     className="col-xl-3"
                     style={{ border: "1px solid red" }}
-                ></div>
+                ></div> */}
             </div>
         </div>
     );
